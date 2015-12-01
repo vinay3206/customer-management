@@ -1,0 +1,53 @@
+{{#link-to 'customer.list' class="pull-right margin-bottom-10"}}Back{{/link-to}}
+<form>
+  <div class="form-group">
+    <label for="exampleInputName">Name</label>
+    {{input type="text" value=model.name class="form-control" id="exampleInputName" placeholder="Name"}}
+  </div>
+  <div class="form-group">
+    <label for="exampleInputMobile">Mobile Number</label>
+    {{input type="text" value=model.mobile class="form-control" id="exampleInputMobile" placeholder="Mobile number"}}
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPhone">Phone Number</label>
+    {{input type="text" value=model.phone class="form-control" id="exampleInputPhone" placeholder="Phone number"}}
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    {{input type="email" value=model.email class="form-control" id="exampleInputEmail1" placeholder="Email"}}
+  </div>
+  {{#each model.addresses as |address index|}}
+    <fieldset>
+      <legend>Address {{increment index}}</legend>
+      <div class="form-group">
+        <label>Flat</label>
+        {{input tye="text" value=address.flat class="form-control"  placeholder="Flat"}}
+      </div>
+      <div class="form-group">
+        <label>Street</label>
+        {{input type="text" value=address.street class="form-control" placeholder="Street"}}
+      </div>
+      <div class="form-group">
+        <label>Pin Code</label>
+        {{input type="text" value=address.pinCode class="form-control"  placeholder="Pin Code"}}
+      </div>
+      <div class="form-group">
+        <label>State</label>
+        {{#x-select value=address.state class="form-control"}}
+          {{#x-option value=null}}Select a state{{/x-option}}
+          {{#each stateList as |state|}}
+            {{#x-option value=state}}{{state}}{{/x-option}}
+          {{/each}}
+        {{/x-select}}
+      </div>
+  </fieldset>
+  {{/each}}
+  <button type="button" class="btn btn-default"{{action "addAddress"}}>
+    {{#if model.addresses.length}}
+      Add Another Address
+    {{else}}
+      Add Address
+    {{/if}}
+  </button>
+  <button type="submit" class="btn btn-primary"{{action "save"}}>Submit</button>
+</form>
